@@ -1,0 +1,33 @@
+.colors:{
+    color: #d2b1a3; /* Headers and Key Elements */
+    color: #f7a89c; /* Highlights and Secondary Buttons */ 
+    color: #fafafa; /* Main Background */
+    color: #c6a9a0; /* Call-to-Action Buttons and Icons */
+    color: #4a4a4a; /* Primary Text */
+    color: #7d7d7d; /* Secondary Text */
+    color: #e8e2d3; /* Borders and Dividers */
+    color: #6e6e6e; /* Navigation bar */
+    color: #fafafa; /* Navigation text and icons */
+
+
+
+    color: #000000; /* Background 1 */
+    color: #ffffff; /* Background 2 */ 
+    color: #000000; /* Headers and Key Elements 1 */
+    color: #ffffff; /* Headers and Key Elements 2 */
+    color: #f8b1b0; /* Text 1 */
+    color: #f5f5f5; /* Text 2 */
+    color: #f8b1b0; /* Buttons and Call-to-Actions 1 */
+    color: #b76e79; /* Buttons and Call-to-Actions 2 */
+    color: #c0c0c0; /* Borders and Dividers */
+}
+
+/*
+
+Background: Black (#000000) or White (#ffffff) depending on the section.
+Headers and Key Elements: Black (#000000) or White (#ffffff).
+Text: Charcoal Black (#333333) for primary text and Light Gray (#f5f5f5) for secondary text.
+Buttons and Call-to-Actions: Soft Pink (#f8b1b0) or Rose Gold (#b76e79) for a luxurious feel.
+Borders and Dividers: Silver (#c0c0c0) to add subtle detail.
+
+*/
