@@ -1,24 +1,21 @@
+## Cheatsheet for client side
+
+
+
 ## Starting React 
 
 ```js
 
-npx create-react-app folder-name (lowercase!!)  // ONLY FOR FRONT END
+npx create-react-app client  
 
-// FOR FULL STACK
-npx create-react-app client  // we can call our project "client". Make sure you are in the same folder level as your "server.js" ( for full stack application )
 npm install axios (api)
+
 npm install react-router-dom (routing)
+
+
 
 ```
 
-
-
-
-
-
-
-
-## FOR THE CLIENT ( REACT )
 
 ## Index.js
 
@@ -37,219 +34,6 @@ import {BrowserRouter} from 'react-router-dom'
 ```
 
 
-## FOR THE SERVER
-
-## Terminal
-
-```js
-
-create or touch server.js
-
-npm init -y
-
-npm install express
-
-npm install mongoose dotenv
-
-npm install mongodb
-
-touch .env    // CREATE A .ENV FILE
-
-
-touch .gitignore   // CREATE A GITIGNORE FILE
-
-
-npm install cors // This will install the ability to make cross-origin requests. 
-
-npm install -g nodemon // to automatically restart your node server
-
-nodemon server.js  // TO RUN THE SERVER
-
-```
-
-
-
-
-## Controller
-
-```js
-
-//Different commands in controller
-
-
-const User = require('../models/user.model');
- 
-module.exports.findAllUsers = (req, res) => {
-    User.find()
-        .then((allDaUsers) => {
-            res.json({ users: allDaUsers })
-        })
-        .catch((err) => {
-            res.json(err)
-        });
-}
- 
-module.exports.findOneSingleUser = (req, res) => {
-    User.findOne({ _id: req.params.id })
-        .then(oneSingleUser => {
-            res.json({ user: oneSingleUser })
-        })
-        .catch((err) => {
-            res.json(err)
-        });}
- 
-module.exports.createNewUser = (req, res) => {
-    User.create(req.body)
-        .then(newlyCreatedUser => {
-            res.json({ user: newlyCreatedUser })
-        })
-        .catch((err) => {
-            res.json(err) // DELETE IF OTHER LINE IS UNCOMMENTED
-            //res.status(400).json(err)
-        });}
-
-// THIS IS FOR EDIT/ UPDATE
-module.exports.updateExistingUser = (req, res) => {
-    User.findOneAndUpdate(
-        { _id: req.params.id },
-        req.body,
-        { new: true, runValidators: true }
-    )
-        .then(updatedUser => {
-            res.json({ user: updatedUser })
-        })
-        .catch((err) => {
-            res.json(err) // DELETE IF OTHER LINE IS UNCOMMENTED
-            //res.status(400).json(err)
-        });}
-
-// THIS IS FOR DELETE
-module.exports.deleteAnExistingUser = (req, res) => {
-    User.deleteOne({ _id: req.params.id })
-        .then(result => {
-            res.json({ result: result })
-        })
-        .catch((err) => {
-            res.json(err)
-        });}
-
-
-```
-
-## Route
-
-```js
-
-// for your route
-
-
-const UserController = require('../controllers/user.controller');
- 
-module.exports = app => {
-    app.get('/api/users', UserController.findAllUsers);
-    app.get('/api/users/:id', UserController.findOneSingleUser);
-    app.patch('/api/users/:id', UserController.updateExistingUser);
-    app.post('/api/users', UserController.createNewUser);
-    app.delete('/api/users/:id', UserController.deleteAnExistingUser);
-}
-
-```
-
-## Server.js
-
-```js
-
-
-// for your server
-
-const express = require('express');
-const cors = require('cors');
-const app = express();
-require('dotenv').config();
-const port = process.env.PORT;
-require('./config/mongoose.config'); // This is new
-app.use(cors());
-app.use(express.json()); // This is new
-app.use(express.urlencoded({ extended: true })); // This is new
-require('./routes/person.routes')(app); // CHANGE THE PERSON NAME
-    
-app.listen(port, () => console.log(`Listening on port: ${port}`) );
-
-
-
-
-
-
-```
-
-## Model
-
-```js
-
-// for your model
-
-const mongoose = require('mongoose');
- 
-const UserSchema = new mongoose.Schema({
-    name: {
-        type: String
-        // required: [true, "{PATH} is required"],                           ( FOR VALIDATIONS )
-        // minLength: [3, "{PATH} must have at least 3 characters"]
-    },
-    age: {
-        type: Number
-        // required: [true, "{PATH} is required"],                           ( FOR VALIDATIONS )
-        // minLength: [13, "{PATH} must have at be atleast 13 years old"]
-    }
-}, { timestamps: true });
- 
-const User = mongoose.model('User', UserSchema);
- 
-module.exports = User;
-
-```
-
-## Config.js
-
-```js
-
-const mongoose = require('mongoose');
-const dbName = process.env.DB;
-const username = process.env.ATLAS_USERNAME;
-const pw = process.env.ATLAS_PASSWORD;
-// CHANGE YOUR DATABASE
-const uri = `mongodb+srv://${username}:${pw}@YOUR_CONNECTION_STRING_HERE/${dbName}?retryWrites=true&w=majority`;
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log("Established a connection to the database"))
-    .catch(err => console.log("Something went wrong when connecting to the database", err));
-
-
-
-```
-## .env
-
-```js
-
-PORT=8000
-DB=my_db
-ATLAS_USERNAME=root
-ATLAS_PASSWORD=root
-
-```
-
-
-## Gitignore
-
-```js
-
-/node_modules
-.env
-
-
-```
 
 ## FUNCTIONS
 
@@ -271,6 +55,7 @@ function App() {
         <Route path="/users/new" element={<Create />} />
         <Route path="/users/:id/edit" element={<Edit />} />
         <Route path="*" element={< Navigate to={"/users"} />} />
+        <Route path="*" element={< Navigate to={"/stride/home"} />} />
       </Routes>
 
     </div>
@@ -551,19 +336,3 @@ const OneP = (props) => {
 export default OneP
 
 ```
-
-## ERRORS
-
-useRef is an installation problem
-
-.map is not a function, Not mapping over an array, (res. data. database name)
-
-when component won't load, check routes ( is there a / when needed? )
-
-check lowercase, uppercase match
-
-check spelling
-
-check brackets, indendation
-
-check imports from
